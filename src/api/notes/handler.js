@@ -1,12 +1,10 @@
 const ClientError = require('../../exceptions/ClientError');
 
-
 class NotesHandler {
   constructor(service, validator) {
     this._service = service;
     this._validator = validator;
 
-    // Agar this nya merujuk pada instance dari NotesService bukan object route
     this.postNoteHandler = this.postNoteHandler.bind(this);
     this.getNotesHandler = this.getNotesHandler.bind(this);
     this.getNoteByIdHandler = this.getNoteByIdHandler.bind(this);
@@ -39,7 +37,7 @@ class NotesHandler {
         response.code(error.statusCode);
         return response;
       }
- 
+
       // Server ERROR!
       const response = h.response({
         status: 'error',
@@ -80,7 +78,7 @@ class NotesHandler {
         response.code(error.statusCode);
         return response;
       }
- 
+
       // Server ERROR!
       const response = h.response({
         status: 'error',
@@ -112,7 +110,7 @@ class NotesHandler {
         response.code(error.statusCode);
         return response;
       }
- 
+
       // Server ERROR!
       const response = h.response({
         status: 'error',
@@ -128,6 +126,7 @@ class NotesHandler {
     try {
       const { id } = request.params;
       await this._service.deleteNoteById(id);
+
       return {
         status: 'success',
         message: 'Catatan berhasil dihapus',
@@ -141,7 +140,7 @@ class NotesHandler {
         response.code(error.statusCode);
         return response;
       }
- 
+
       // Server ERROR!
       const response = h.response({
         status: 'error',
